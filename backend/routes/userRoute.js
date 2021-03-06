@@ -4,9 +4,9 @@ import { getToken } from "../util";
 
 
 
-const router = express.Router() 
+const userRouter = express.Router() 
 
-router.post("/signin", async (req, res) => {
+userRouter.post("/signin", async (req, res) => {
     
     // findone is a filter
     const signinUser = await User.findOne({
@@ -17,11 +17,12 @@ router.post("/signin", async (req, res) => {
         // if user exisits, we send back the details of the user
         // token checks if a user is authenticated or not
         res.send({
-            _id: signinUser._id,
+            _id: signinUser.id,
             name: signinUser.name,
             email: signinUser.email,
+            password: signinUser.password,           
             isAdmin: signinUser.isAdmin,
-            token: getToken(signinUser)
+            token: getToken(signinUser) 
         })
 
     }else{
@@ -29,7 +30,7 @@ router.post("/signin", async (req, res) => {
     }
 } )
 
-router.post("/register", async (req, res) => {
+userRouter.post("/register", async (req, res) => {
     
    
     const user = new User({
@@ -37,6 +38,8 @@ router.post("/register", async (req, res) => {
         email: req.body.email,
         password: req.body.password
     })
+
+    console.log(user)
     const newUser = await user.save()
     if(newUser){
         // if user exisits, we send back the details of the user
@@ -46,7 +49,7 @@ router.post("/register", async (req, res) => {
             name: newUser.name,
             email: newUser.email,
             isAdmin: newUser.isAdmin,
-            token: getToken(newUser)
+            // token: getToken(newUser)
         })
 
     }else{
@@ -54,7 +57,7 @@ router.post("/register", async (req, res) => {
     }
 } )
 
-router.get("/createadmin", async (req, res) => {
+userRouter.get("/createadmin", async (req, res) => {
 
     try {
         const user = new User({
@@ -73,4 +76,4 @@ router.get("/createadmin", async (req, res) => {
     
 })
 
-export default router;
+export default userRouter;

@@ -12,9 +12,10 @@ function SigninScreen(props) {
     const dispatch = useDispatch() 
 
     useEffect(() =>{
-            //   if (userInfo){
-            //        props.history.push("/")
-            //   }
+              if (userInfo){
+                  console.log(userInfo)
+                   props.history.push("/")
+              }
         return () => {
 
         }
