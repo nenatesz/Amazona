@@ -1,7 +1,7 @@
 import {createStore, combineReducers, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk'; 
 import Cookie from "js-cookie"
-import { productDetailsReducer, productListReducer, productSaveReducer } from './reducers/productReducers';
+import { productDeleteReducer, productDetailsReducer, productListReducer, productSaveReducer } from './reducers/productReducers';
 import { cartReducer} from './reducers/cartReducers'
 import { userRegisterReducer, userSigninReducer } from './reducers/userReducers';
 
@@ -19,7 +19,7 @@ const reducer = combineReducers({
     userSignin: userSigninReducer,
     userRegister: userRegisterReducer,
     productSave: productSaveReducer,
-
+    productDelete: productDeleteReducer,
 })
 
 // thunk allows us run async operation inside action in redux

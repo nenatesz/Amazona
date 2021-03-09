@@ -72,14 +72,13 @@ function RegisterScreen(props) {
                    </input>
               </li>
               <li>
-                  <button type="submit" className="button primary">
+                  <button type="submit" className="button primary full-width">
                      Register
                   </button>
               </li>  
               <li>
                   Already have an Acccount? <Link to="/signin">Sigin-in</Link>
               </li>
-
            </ul>
 
     </form>

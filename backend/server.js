@@ -22,6 +22,7 @@ app.use(bodyParser.json())
 
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
+
  
 // app.get("/api/products/:id", (req, res) => {
 //     const productId = req.params.id
