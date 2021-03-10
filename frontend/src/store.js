@@ -10,7 +10,7 @@ const cartItems = Cookie.getJSON("cartItems") || [];
 const userInfo = Cookie.getJSON("userInfo") || null;
 
 
-const initialState = {cart: {cartItems }, userSignin: {userInfo}};
+const initialState = {cart: {cartItems, shipping:{}, payment:{} }, userSignin: {userInfo}};
 // reducer is a function that gets a state and an action, and returns a newer state based on that action.
 const reducer = combineReducers({
     productList: productListReducer, 
