@@ -25,7 +25,7 @@ function HomeScreen(props) {
       //  cleanup
     };
     // an empty array means that this will run only at component did mount
-  }, [])
+  }, [dispatch])
 
   return (
     <div>

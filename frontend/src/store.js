@@ -19,6 +19,10 @@ const initialState = {
         shipping: {},
         payment: {}
     },
+    userSignin: {
+       userInfo: localStorage.getItem("userInfo") ?
+       JSON.parse(localStorage.getItem("userInfo")) : null
+    }
    
 };
 

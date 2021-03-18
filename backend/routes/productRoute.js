@@ -1,19 +1,30 @@
 import express from "express";
-import Product from "../models/productModel";
+import expressAsyncHandler from "express-async-handler";
+import data from "../data.js";
+import Product from "../models/productModel.js";
 import {isAdmin, isAuth} from "../util"
 
 
 
 const productRouter = express.Router();
 
-productRouter.get("/", async (req, res) => {
- const products = await Product.find({});
- res.setHeader('People', 'Fun');
- return res.status(200).send(products)
-});
+productRouter.get("/", expressAsyncHandler(async (req, res) => {
+    const products = await Product.find({});
+    // res.setHeader('People', 'Fun');
+    // return res.status(200).send(products)
+    res.send(products)
+   }));
+
+productRouter.get("/seed", expressAsyncHandler(async (req, res) => {
+    // await Product.remove({})
+    const createdProducts = await Product.insertMany(data.products);
+    res.send({ createdProducts })
+}))
+
+
 
 productRouter.get("/:id", async (req, res) => {
- const product = await Product.findOne({_id: req.params.id});
+ const product = await Product.findById(req.params.id);
  if(product){
     res.send(product)
  }else{

@@ -1,40 +1,58 @@
-export default {
+import bcrypt from 'bcryptjs'; 
+const data = {
+  users: [
+    {
+       name: 'Tessy',
+       email: 'admin@example.com',
+       password: bcrypt.hashSync('1234', 8),
+       isAdmin: true,
+    },
+    {
+       name: 'John',
+       email: 'john@example.com',
+       password: bcrypt.hashSync('1234', 8),
+       isAdmin: false,
+    },
+
+  ],
     products: [
         {
-          _id: "1",
-          name: 'Ladies black bag',
-          category: 'bag',
+          name: 'Ladies black bag',  
+          price: 60,
           image: '../images/image1.jpg',
           brand: 'chanel',
-          price: 60,
+          category: 'bag',
+          countInStock: 0,
           rating: 4.5,
           numReviews: 10,
-          countInStock: 0,
+          
 
         },
         {
-            _id: "2",
             name: 'pink hand bag',
-            category: 'bag',
+            price: 50,
             image: '../images/image2.jpg',
             brand: 'chanel',
-            price: 50,
+            category: 'bag',
+            countInStock: 10,
             rating: 4.2,
             numReviews: 12,
-            countInStock: 10,
+           
   
           },
           {
-            _id: "3",
             name: 'Ladies hand bag',
-            category: 'bag',
+            price: 70,
             image: '../images/image3.jpg',
             brand: 'chanel',
-            price: 70,
+            category: 'bag',
+            countInStock: 6,
             rating: 4.8,
             numReviews: 14,
-            countInStock: 6,
+            
   
           } 
     ]
 }
+
+export default data;

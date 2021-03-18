@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { signin } from "../actions/userActions";
+import LoadingBox from "../components/LoadingBox";
+import MessageBox from "../components/MessageBox";
 
 function SigninScreen(props) {
 
@@ -17,11 +19,9 @@ function SigninScreen(props) {
                   console.log(userInfo)
                    props.history.push(redirect)
               }
-        return () => {
-
-        }
+        
         // if userinfo state changes, this line of code will run
-    }, [userInfo]);
+    }, [props.history, userInfo, redirect]);
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -32,41 +32,46 @@ function SigninScreen(props) {
     
     return <div className="form">
        <form onSubmit={submitHandler}>
-           <ul className="form-container">
-               <li>
-                   <h2>Sign-In</h2>
-               </li>
-               <li>
-                   {loading && <div>Loading...</div>}
-                   {error && <div>{error}</div>}
-               </li>
-              <li>
+           <div className="form-container">
+               <div>
+                   <h1>Sign In</h1>
+               </div>
+               <div>
+                   {loading && <LoadingBox></LoadingBox>}
+                   {error && <MessageBox variant="danger">{error}</MessageBox>}
+               </div>
+              <div>
                   <label htmlFor="email">
                       Email
                    </label>
-                   <input type="email" name="email" id="email" onChange={(e) => setEmail(e.target.value)}>                      
+                   <input type="email" name="email" id="email"
+                   placeholder="Enter email"
+                   required onChange={(e) => setEmail(e.target.value)}>                      
                    </input>
-              </li> 
-              <li>
+              </div> 
+              <div>
                   <label htmlFor="password">
                       Password
                    </label>
-                   <input type="password" name="password" id="password" onChange={(e) => setPassword(e.target.value)}>                      
+                   <input type="password" name="password" id="password" placeholder="Enter password" required onChange={(e) => setPassword(e.target.value)}>                      
                    </input>
-              </li>
-              <li>
+              </div>
+              <div>
+                  <label />
                   <button type="submit" className="button primary">
-                     Signin
+                     Sign In
                   </button>
-              </li>  
-              <li>
-                  New to Amazona?
-              </li>
-              <li>
-                  <Link to={redirect === "/" ? "register" : "register?redirect=" + redirect} className="button secondary">Create your Amazona account</Link>
-              </li>
+              </div>  
+              <div>
+                  <label />  
+                  <div>
+                  New customer? {' '}                 
+                  <Link to={redirect === "/" ? "register" : "register?redirect=" + redirect} className="button secondary">Create account</Link>
+              </div>
+              </div>
+              
 
-           </ul>
+           </div>
        </form>
 
     </div>

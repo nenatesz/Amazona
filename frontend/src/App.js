@@ -11,18 +11,17 @@ import ShippingScreen from "./screens/ShippingScreen"
 import PaymentScreen from "./screens/PaymentScreen"
 import PlaceOrderScreen from "./screens/PlaceOrderScreen"
 import "./App.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { signout } from "./actions/userActions";
 
 
 function App() {
   
   const cart = useSelector(state => state.cart)
   const {cartItems} = cart;
-
   const userSignin = useSelector(state => state.userSignin);
   const {userInfo} =  userSignin; 
-  console.log(userInfo)
-
+  const dispatch = useDispatch()
   const openMenu = () => {
     document.querySelector(".sidebar").classList.add("open");
   };
@@ -30,6 +29,10 @@ function App() {
   const closeMenu = () => {
     document.querySelector(".sidebar").classList.remove("open");
   };
+
+  const signoutHandler = () => {
+     dispatch(signout());
+  }
 
   return (
     <BrowserRouter>
@@ -47,8 +50,14 @@ function App() {
             )}
             </Link>
             {
-               userInfo ? <Link to="/profile">{userInfo.name}</Link> :
-               <Link to="/signin">signin</Link>
+               userInfo ? (
+               <div className='dropdown'>
+               <Link to="#">{userInfo.name} <i className='fa fa-caret-down'></i></Link>
+               <ul className='dropdown-content'>
+                 <Link to="#signout" onClick={signoutHandler}>Sign Out</Link>
+               </ul>
+               </div>):
+               (<Link to="/signin">signin</Link>)
             }            
          </div>
         </header>

@@ -1,5 +1,5 @@
 import Axios from "axios"
-import { USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_SIGNIN_FAIL, USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS } from "../constants/userConstants";
+import { USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_SIGNIN_FAIL, USER_SIGNIN_REQUEST, USER_SIGNIN_SUCCESS, USER_SIGNOUT } from "../constants/userConstants";
 import Cookie from "js-cookie"
 
 const signin = (email, password) => async (dispatch) => {
@@ -7,11 +7,19 @@ const signin = (email, password) => async (dispatch) => {
     try{
         const {data} = await Axios.post("/api/users/signin", {email, password})
         dispatch({type: USER_SIGNIN_SUCCESS, payload: data});
-         Cookie.set("userInfo", JSON.stringify(data));        
+        localStorage.setItem("userInfo", JSON.stringify(data))
+        //  Cookie.set("userInfo", JSON.stringify(data));        
     }catch(error){
-        dispatch({type: USER_SIGNIN_FAIL, payload: error.message})
+        dispatch({type: USER_SIGNIN_FAIL, payload: error.response && error.response.data.message ?
+        error.response.data.message : error.message
+    })
     }};
-    
+
+const signout = () => (dispatch) => {
+    localStorage.removeItem("userInfo"); 
+    localStorage.removeItem("cartItems"); 
+    dispatch({type: USER_SIGNOUT})
+}
 
 const register = (name, email, password) => async (dispatch) => {
     dispatch({type: USER_REGISTER_REQUEST, payload: {name, email, password}})
@@ -25,4 +33,4 @@ const register = (name, email, password) => async (dispatch) => {
         dispatch({type: USER_REGISTER_FAIL, payload: error.message})
     }}
 
-    export {signin, register}; 
+    export {signin, register, signout }; 

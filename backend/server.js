@@ -1,15 +1,18 @@
-import express from "express";
-import data from "./data";
+import express from "express"; 
 import dotenv from "dotenv";
 import config from "./config";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
-import userRouter from "./routes/userRoute";
-import productRouter from "./routes/productRoute";
-import paymentRouter from "./routes/payment";
+import userRouter from "./routes/userRoute.js";
+import productRouter from "./routes/productRoute.js";
+import paymentRouter from "./routes/payment.js";
 
-dotenv.config(); 
+dotenv.config();
 
+const app = express()
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(bodyParser.json())
 const mongodbUrl = config.MONGODB_URL
 mongoose.connect(mongodbUrl, {
     useNewUrlParser: true,
@@ -18,13 +21,15 @@ mongoose.connect(mongodbUrl, {
 
 }).catch(error => console.log(error.reason))
 
-const app = express()
-app.use(bodyParser.json())
+
 
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
 app.use('/api/payments', paymentRouter);
-
+app.use((err, req, res, next) => {
+    res.status(500).send({ message: err.message });
+})
+ 
  
 // app.get("/api/products/:id", (req, res) => {
 //     const productId = req.params.id
@@ -39,9 +44,9 @@ app.use('/api/payments', paymentRouter);
 //     res.send(data.products);
 // });
 
-
-app.listen(5000, () => {
-    console.log("server started at http://localhost:5000")
+const port = config.PORT;
+app.listen(port, () => {
+    console.log(`server started at http://localhost:${5000}`)
 })
 
 
