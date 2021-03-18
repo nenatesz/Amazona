@@ -6,12 +6,23 @@ import { cartReducer} from './reducers/cartReducers'
 import { userRegisterReducer, userSigninReducer } from './reducers/userReducers';
 
 
-const cartItems = Cookie.getJSON("cartItems") || [];
-const userInfo = Cookie.getJSON("userInfo") || null;
+// const cartItems = Cookie.getJSON("cartItems") || [];
+// const userInfo = Cookie.getJSON("userInfo") || null;
 
 
-const initialState = {cart: {cartItems, shipping:{}, payment:{} }, userSignin: {userInfo}};
+// const initialState = {cart: {cartItems, shipping:{}, payment:{} }, userSignin: {userInfo}};
 // reducer is a function that gets a state and an action, and returns a newer state based on that action.
+
+const initialState = {
+    cart: {
+        cartItems: localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [],
+        shipping: {},
+        payment: {}
+    },
+   
+};
+
+
 const reducer = combineReducers({
     productList: productListReducer, 
     productDetails: productDetailsReducer,

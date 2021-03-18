@@ -15,6 +15,8 @@
     "@babel/core": "^7.12.16",
     "@babel/node": "^7.12.16",
     "@babel/preset-env": "^7.12.16",
+    "eslint": "^7.22.0",
+    "eslint-plugin-react": "^7.22.0",
     "nodemon": "^2.0.7"
   },
   "scripts": {

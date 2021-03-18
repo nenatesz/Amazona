@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import userRouter from "./routes/userRoute";
 import productRouter from "./routes/productRoute";
+import paymentRouter from "./routes/payment";
 
 dotenv.config(); 
 
@@ -22,6 +23,7 @@ app.use(bodyParser.json())
 
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
+app.use('/api/payments', paymentRouter);
 
  
 // app.get("/api/products/:id", (req, res) => {

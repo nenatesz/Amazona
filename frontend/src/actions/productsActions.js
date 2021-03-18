@@ -42,14 +42,13 @@ const saveProduct = (product) => async (dispatch, getState) => {
 
 
 const detailsProduct = (productId) =>  async (dispatch) => {
+    dispatch({type: PRODUCT_DETAILS_REQUEST , payload: productId});
     try{
-        dispatch({type: PRODUCT_DETAILS_REQUEST , payload: productId});
         const {data} = await Axios.get("/api/products/" + productId);
         dispatch({type: PRODUCT_DETAILS_SUCCESS, payload: data});
-
-    }
-    catch(error){
-      dispatch({type: PRODUCT_DETAILS_FAIL, payload: error.message});
+    }catch(error){
+      dispatch({type: PRODUCT_DETAILS_FAIL, payload: error.response && error.message ? error.response.data.message : error.message
+    });
     }
 }
 const deleteProduct = (productId) =>  async (dispatch, getState) => {

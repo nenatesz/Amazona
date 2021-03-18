@@ -8,15 +8,12 @@ function PaymentScreen (props){
 
     const [paymentMethod, setPaymentMethod] = useState('');
     const dispatch = useDispatch()
-    
 
     const submitHandler = (e) => {
         e.preventDefault()
         dispatch(savePayment({paymentMethod}))
         props.history.push("/placeorder")
     }
-
-
 
     return <div>
         <CheckoutSteps step1 step2 step3></CheckoutSteps>
@@ -36,7 +33,7 @@ function PaymentScreen (props){
                     </div> 
                 </li>
                 <li>
-                    <button type='submit' className='button primary'>Continue</button>
+                    <button type='sumbit' className='button primary'>Continue</button>
                 </li>
             </ul>
         </form>

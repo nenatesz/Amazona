@@ -15,7 +15,9 @@ import { useSelector } from "react-redux";
 
 
 function App() {
-
+  
+  const cart = useSelector(state => state.cart)
+  const {cartItems} = cart;
 
   const userSignin = useSelector(state => state.userSignin);
   const {userInfo} =  userSignin; 
@@ -39,7 +41,11 @@ function App() {
             {/* <a href="/">Amazona</a> */}
           </div>
           <div className="header-links">
-            <Link to="/cart">Cart</Link>
+            <Link to="/cart">Cart
+            {cartItems.length > 0 && (
+              <span className='badge'>{cartItems.length}</span>
+            )}
+            </Link>
             {
                userInfo ? <Link to="/profile">{userInfo.name}</Link> :
                <Link to="/signin">signin</Link>
@@ -73,7 +79,7 @@ function App() {
             <Route path="/" exact={true} component={HomeScreen} />
           </div>
         </main>
-        <footer className="footer">All right reserved</footer>
+        <footer className="footer row center">All right reserved</footer>
       </div>
     </BrowserRouter>
   );

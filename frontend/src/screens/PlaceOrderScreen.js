@@ -28,10 +28,6 @@ function PlaceOrderScreen(props){
         props.history.push("/signin?redirect=shipping")
     }
 
-    const placeOrderHandler = () => {
-        // create an order
-    }
-
     useEffect(() => {
 
         return () =>{
@@ -39,7 +35,9 @@ function PlaceOrderScreen(props){
         }
     }, []);
 
-
+    const placeOrderHandler = () => {
+        
+    }
 
     return <div>
         <CheckoutSteps step1 step2 step3 step4></CheckoutSteps>
