@@ -28,7 +28,7 @@ const saveProduct = (product) => async (dispatch, getState) => {
             });
             dispatch({type: PRODUCT_SAVE_SUCCESS, paylaod: data})
         }else{
-            const {data} = await Axios.put("/api/products/" + product._id, product, {
+            const {data} = await Axios.put(`/api/products/${product._id}`, product, {
                 headers: {
                     Authorization: 'Bearer ' + userInfo.token
                 }
@@ -44,7 +44,7 @@ const saveProduct = (product) => async (dispatch, getState) => {
 const detailsProduct = (productId) =>  async (dispatch) => {
     dispatch({type: PRODUCT_DETAILS_REQUEST , payload: productId});
     try{
-        const {data} = await Axios.get("/api/products/" + productId);
+        const {data} = await Axios.get(`/api/products/${productId}`);
         dispatch({type: PRODUCT_DETAILS_SUCCESS, payload: data});
     }catch(error){
       dispatch({type: PRODUCT_DETAILS_FAIL, payload: error.response && error.message ? error.response.data.message : error.message

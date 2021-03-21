@@ -5,7 +5,8 @@ import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import userRouter from "./routes/userRoute.js";
 import productRouter from "./routes/productRoute.js";
-import paymentRouter from "./routes/payment.js";
+// import paymentRouter from "./routes/payment.js";
+import orderRouter from "./routes/orderRoute.js";
 
 dotenv.config();
 
@@ -25,7 +26,9 @@ mongoose.connect(mongodbUrl, {
 
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
-app.use('/api/payments', paymentRouter);
+app.use('/api/orders', orderRouter);
+
+// MiddleWare
 app.use((err, req, res, next) => {
     res.status(500).send({ message: err.message });
 })

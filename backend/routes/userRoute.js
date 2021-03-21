@@ -38,32 +38,28 @@ userRouter.post("/signin", async (req, res) => {
     }
 } )
 
-userRouter.post("/register", async (req, res) => {
-    
-   
+userRouter.post("/register", expressAsyncHandler(async (req, res) => {
+     
     const user = new User({
         name: req.body.name,
         email: req.body.email,
-        password: req.body.password
+        password: bcrypt.hashSync(req.body.password, 8)
     })
-
-    console.log(user)
-    const newUser = await user.save()
-    if(newUser){
+    const createdUser = await user.save()
+    if(createdUser){
         // if user exisits, we send back the details of the user
         // token checks if a user is authenticated or not
         res.send({
-            _id: newUser._id,
-            name: newUser.name,
-            email: newUser.email,
-            isAdmin: newUser.isAdmin,
-            // token: getToken(newUser)
+            _id: createdUser._id,
+            name: createdUser.name,
+            email: createdUser.email,
+            isAdmin: createdUser.isAdmin,
+            token: generateToken(createdUser)
         })
-
     }else{
         res.status(401).send({msg: 'invalid User Data.'})
     }
-} )
+})  )
 
 userRouter.get("/createadmin", async (req, res) => {
 

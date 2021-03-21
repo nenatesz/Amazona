@@ -17,16 +17,16 @@ const generateToken = (user) => {
 
 
 const isAuth = (req, res, next) => {
-   const token = req.headers.authorization;
-   if (token) {
-       const onlyToken = token.slice(7,  token.length)
-       jwt.verify(onlyToken, config.JWT_SECRET, (err, decode) => {
+   const authorization = req.headers.authorization;
+   if (authorization) {
+       const token = authorization.slice(7,  authorization.length) //Bearer xxxxx; the slice method on the authorization removes the bearer and leaves only the token
+       // the verify method decrypts the token
+       jwt.verify(token, config.JWT_SECRET, (err, decode) => {
            if (err){
                return res.status(401).send({msg: "Invalid Token"})
            }else{
             req.user = decode;
             next();
-            return
            }
            
        })

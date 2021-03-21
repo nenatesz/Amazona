@@ -66,14 +66,11 @@ function SigninScreen(props) {
                   <label />  
                   <div>
                   New customer? {' '}                 
-                  <Link to={redirect === "/" ? "register" : "register?redirect=" + redirect} className="button secondary">Create account</Link>
+                  <Link to={`/register?redirect=${redirect}`} className="button secondary">Create account</Link>
               </div>
               </div>
-              
-
            </div>
        </form>
-
     </div>
 }
 

@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { register } from "../actions/userActions";
+import LoadingBox from "../components/LoadingBox";
+import MessageBox from "../components/MessageBox";
 
 
 function RegisterScreen(props) {
@@ -22,67 +24,67 @@ function RegisterScreen(props) {
            props.history.push(redirect)
        }
     
-        return () => {
-    
-        }
-    
-    }, [userInfo])
+    }, [userInfo, props.history, redirect])
 
     const submitHandler = (e) => {
         e.preventDefault();
-        dispatch(register(name, email, password))
+        if(password !== repassword){
+           alert("password and confirm password are not a match")
+        } else{
+            dispatch(register(name, email, password))
+        }         
     }
 
     return <div className="form">
 
     <form onSubmit={submitHandler}>
-    <ul className="form-container">
-               <li>
+    <div className="form-container">
+               <div>
                    <h2>Create Account</h2>
-               </li>
-               <li>
-                   {loading && <div>Loading...</div>}
-                   {error && <div>{error}</div>}
-               </li>
-               <li>
+               </div>
+               <div>
+                   {loading && <LoadingBox></LoadingBox>}
+                   {error && <MessageBox variant='danger'>{error}</MessageBox>}
+               </div>
+               <div>
                   <label htmlFor="name">
                       Name
                    </label>
-                   <input type="name" name="name" id="name" onChange={(e) => setName(e.target.value)}>                      
+                   <input type="name" name="name" id="name" required onChange={(e) => setName(e.target.value)}>                      
                    </input>
-              </li> 
-              <li>
+              </div> 
+              <div>
                   <label htmlFor="email">
                       Email
                    </label>
-                   <input type="email" name="email" id="email" onChange={(e) => setEmail(e.target.value)}>                      
+                   <input type="email" name="email" id="email" required onChange={(e) => setEmail(e.target.value)}>                      
                    </input>
-              </li> 
+              </div> 
              
-              <li>
+              <div>
                   <label htmlFor="password">
                       Password
                    </label>
-                   <input type="password" name="password" id="password" onChange={(e) => setPassword(e.target.value)}>                      
+                   <input type="password" name="password" id="password" required onChange={(e) => setPassword(e.target.value)}>                      
                    </input>
-              </li>
-              <li>
+              </div>
+              <div>
                   <label htmlFor="password">
                      Re-Enter Password
                    </label>
-                   <input type="password" name="repassword" id="repassword" onChange={(e) => setrePassword(e.target.value)}>                      
+                   <input type="password" name="repassword" id="repassword" required onChange={(e) => setrePassword(e.target.value)}>                      
                    </input>
-              </li>
-              <li>
+              </div>
+              <div>
                   <button type="submit" className="button primary full-width">
                      Register
                   </button>
-              </li>  
-              <li>
-                  Already have an Acccount? <Link to={redirect === "/" ? "signin" : "signin?redirect=" + redirect}>Sigin-in</Link>
-              </li>
-           </ul>
-
+              </div>  
+              <div>
+                  Already have an Acccount?{' '}
+                   <Link to= {`/signin?redirect=${redirect}`}>Sigin In</Link>
+              </div>
+           </div>
     </form>
     </div>
 

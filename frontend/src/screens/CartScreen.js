@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { addToCart, removeFromCart } from "../actions/cartActions"
@@ -11,6 +11,7 @@ function CartScreen(props){
     
     const cart = useSelector(state => state.cart)
     const {cartItems} = cart;
+    console.log(cartItems)
     const productId = props.match.params.id;
     const qty = props.location.search ? Number(props.location.search.split("=")[1]) : 1;
     const dispatch = useDispatch()
@@ -41,10 +42,10 @@ function CartScreen(props){
                     <MessageBox>Cart is empty. <Link to='/'>Go Shopping</Link>
                     </MessageBox> 
                     :
-                    (
-                        <ul className="cart-list-container">
+                    (                       
+                    <ul className="cart-list-container">
                             {
-                              cartItems.map(item => 
+                              cartItems.map((item) => 
                                 <li key={item.product}>
                                     <div className="cart-image">
                                     <img src={item.image} alt={item.name}></img>
@@ -56,7 +57,7 @@ function CartScreen(props){
                                     </div>
                                     <div>
                                         Qty:
-                                        <select value={item.qty} onChange={(e) => dispatch(addToCart(item.product, e.target.value))}>
+                                        <select value={item.qty} onChange={(e) => dispatch(addToCart(item.product, Number(e.target.value)))}>
                                             {[...Array(item.countInStock).keys()].map((x) => 
                                                 <option key={x + 1} value={x + 1}> {x + 1} </option>
                                                 )}
@@ -91,9 +92,7 @@ function CartScreen(props){
             <button onClick={checkOutHandler} className="button primary" disabled= {cartItems.length === 0}>
                 Proceed to Checkout
             </button>
-
         </div>
-
     </div>
     )
 }

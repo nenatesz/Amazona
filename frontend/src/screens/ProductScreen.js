@@ -94,15 +94,10 @@ function ProductScreen(props) {
                             </div>
                             </div>
                             </div>
-                    
-
             )
             } 
-             
         </div>
             )
-                            
-    
 }
 
 export default ProductScreen;

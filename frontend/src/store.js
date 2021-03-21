@@ -1,9 +1,10 @@
 import {createStore, combineReducers, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk'; 
-import Cookie from "js-cookie"
+// import Cookie from "js-cookie"
 import { productDeleteReducer, productDetailsReducer, productListReducer, productSaveReducer } from './reducers/productReducers';
 import { cartReducer} from './reducers/cartReducers'
 import { userRegisterReducer, userSigninReducer } from './reducers/userReducers';
+import { orderCreateReducer } from './reducers/orderReducers';
 
 
 // const cartItems = Cookie.getJSON("cartItems") || [];
@@ -14,17 +15,18 @@ import { userRegisterReducer, userSigninReducer } from './reducers/userReducers'
 // reducer is a function that gets a state and an action, and returns a newer state based on that action.
 
 const initialState = {
+    userSignin: {
+        userInfo: localStorage.getItem("userInfo") ?
+        JSON.parse(localStorage.getItem("userInfo")) : null
+     },
     cart: {
         cartItems: localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [],
-        shipping: {},
-        payment: {}
+        shippingAddress: localStorage.getItem("shipping") ? JSON.parse(localStorage.getItem("shipping")) : {},
+        payment: "payStack"
     },
-    userSignin: {
-       userInfo: localStorage.getItem("userInfo") ?
-       JSON.parse(localStorage.getItem("userInfo")) : null
-    }
    
-};
+   
+}
 
 
 const reducer = combineReducers({
@@ -35,6 +37,7 @@ const reducer = combineReducers({
     userRegister: userRegisterReducer,
     productSave: productSaveReducer,
     productDelete: productDeleteReducer,
+    orderCreate: orderCreateReducer,
 })
 
 // thunk allows us run async operation inside action in redux

@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { savePayment } from '../actions/cartActions'
 import CheckoutSteps from '../components/checkoutSteps';
 
 
 function PaymentScreen (props){
-
-    const [paymentMethod, setPaymentMethod] = useState('');
+    const cart = useSelector((state) => state.cart);
+    const { shippingAddress } = cart;
+    if(!shippingAddress.address){
+       props.history.push("/shipping");
+    };
+    const [paymentMethod, setPaymentMethod] = useState('payStack');
     const dispatch = useDispatch()
 
     const submitHandler = (e) => {
@@ -15,32 +19,43 @@ function PaymentScreen (props){
         props.history.push("/placeorder")
     }
 
-    return <div>
+    return <div> 
         <CheckoutSteps step1 step2 step3></CheckoutSteps>
         <div className='form'>
         <form onSubmit={submitHandler}>
-            <ul className='form-container'>
-                <li>
-                    <h2>Payment</h2>
-                </li>
-                <li> 
+            <div className='form-container'>
+                <div>
+                    <h1>Payment Method</h1>
+                </div>
+                <div> 
                     <div>  
-                    <input type='radio' name='paymenyMethod' id='paymentMethod' value='paystack' onChange={(e)=>setPaymentMethod(e.target.value)}>
+                    <input type='radio' name='paymentMethod' id='paymentMethod' value='paystack'
+                    required checked  
+                    onChange={(e)=>setPaymentMethod(e.target.value)}>
                     </input>
-                    <label htmlFor='paymenyMethod'>
+                    <label htmlFor='paymentMethod'>
                         Paystack
                     </label>
                     </div> 
-                </li>
-                <li>
+                </div>
+                <div> 
+                    <div>  
+                    <input type='radio' name='paymentMethod' id='paymentMethod' value='flutterwave'
+                    required   
+                    onChange={(e)=>setPaymentMethod(e.target.value)}>
+                    </input>
+                    <label htmlFor='paymentMethod'>
+                        flutterwave
+                    </label>
+                    </div> 
+                </div>
+                <div>
                     <button type='sumbit' className='button primary'>Continue</button>
-                </li>
-            </ul>
+                </div>
+            </div>
         </form>
     </div>
     </div>
-    
-    
 }
 
 

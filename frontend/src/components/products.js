@@ -6,8 +6,8 @@ import Rating from './Rating';
 function Products(props){
     const {products} = props;
     return(  
-        <div key={products._id}>    
-          <li>
+        <div>    
+          <li key={Number(products._id)}>
             <div className="product">
             <Link to={'/product/' + products._id}> <img
                 className="product-image"

@@ -265,6 +265,9 @@ button.secondary{
 .full-width{
   width: 100%;
 }
+.loading{
+   display: block !important;
+}
 .in-stock{
   color: #20a020;
 }
@@ -367,7 +370,7 @@ max-height: 10rem;
 }
 .form label{
   margin: 1rem 0;
-  display: block;
+  /* display: block; */
 }
 
 /* input{
@@ -425,11 +428,12 @@ max-height: 10rem;
  .checkout-steps{
    display: flex;
    justify-content: space-between;
-   width: 40rem;
+   /* width: 40rem; */
    margin: 1rem auto;
+   padding: 0 5rem 1rem 5rem;
  }
  .checkout-steps > div{
-   border-top: .3rem #c0c0c0 solid;
+   border-top: 0.3rem #c0c0c0 solid;
    color: #c0c0c0;
    flex: 1 1;
    padding-top: 1rem;
@@ -453,7 +457,7 @@ max-height: 10rem;
   flex: 3 1 60rem;
 }
 .placeorder-action{
-  flex: 1 1 20rem;
+  flex: 1 1 30rem;
   border: .1rem #c0c0c0 solid;
   border-radius: .5rem;
   background-color: #fcfcfc;
@@ -479,10 +483,28 @@ max-height: 10rem;
   justify-content: space-between;
   margin: 1rem; 
 }
-.placeorder-action > ul > li:last-child{
+.placeorder-action > ul > li:nth-child(5){
   font-size: 2rem;
   font-weight: bold;
   color: #c04000
+}
+.placeorder-list-container{
+  padding: 0;
+  list-style-type: none;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.placeorder-list-container li{
+  /* border-bottom: .1rem #c0c0c0 solid; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 3rem;
+}
+.placeorder-list-container img{
+  max-height: 10rem;
+  max-width: 10rem;
 }
 
 

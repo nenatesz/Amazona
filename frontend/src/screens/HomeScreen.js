@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import {Link} from 'react-router-dom';
+import React, { useEffect } from "react";
 import {useDispatch, useSelector} from 'react-redux'
 import { listProducts } from "../actions/productsActions";
 import Products from "../components/products";
@@ -32,11 +31,10 @@ function HomeScreen(props) {
     {loading ? <LoadingBox></LoadingBox> :
     error ? <MessageBox variant='danger'>{error}</MessageBox>:
     <div>
-    <ul className='products'>
+    <ul className='products'> 
     {products.map((product)=>
     (<Products products={product}></Products>))}
     </ul>
-    
      </div>
     }
    </div>
