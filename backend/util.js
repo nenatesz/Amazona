@@ -19,7 +19,7 @@ const generateToken = (user) => {
 const isAuth = (req, res, next) => {
    const authorization = req.headers.authorization;
    if (authorization) {
-       const token = authorization.slice(7,  authorization.length) //Bearer xxxxx; the slice method on the authorization removes the bearer and leaves only the token
+       const token = authorization.slice(7, authorization.length) //Bearer xxxxx; the slice method on the authorization removes the bearer and leaves only the token
        // the verify method decrypts the token
        jwt.verify(token, config.JWT_SECRET, (err, decode) => {
            if (err){
@@ -28,19 +28,18 @@ const isAuth = (req, res, next) => {
             req.user = decode;
             next();
            }
-           
        })
    }else{
-    return res.status(401).send({msg: "Token is not supplied."})
+     res.status(401).send({msg: "Token is not supplied."})
    }
    
-}
+};
 
 const isAdmin = (req, res, next) => {
     if (req.user && req.user.isAdmin) {
-        return next();
+        next();
     }else{
-        return res.status(401).send({msg: "Admin Token is not valid."})
+         res.status(401).send({msg: "Admin Token is not valid."})
     }   
 }
 

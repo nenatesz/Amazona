@@ -243,7 +243,7 @@ input,select,textarea,button{
 }
 button{
   cursor: pointer;
-  background-color: #f0c040;    
+  background-color: #f8f8f8;    
 }
 input:hover, select:hover, textarea:hover, button:hover{
   border: .1rem #404040 solid;
@@ -261,6 +261,9 @@ button.primary{
 button.secondary{
   background-color: #f0f0f0;
   text-align: center;
+}
+button.small{
+  font-size: 1.2rem;
 }
 .full-width{
   width: 100%;
@@ -286,6 +289,10 @@ button.secondary{
 .alert-danger{
   color: #a02020;
   background-color: #ffe0e0e0;
+}
+.alert-success{
+  color: #a02020;
+  background-color: #eeffe0;
 }
 /* cart */
 .cart{
@@ -345,7 +352,7 @@ max-height: 10rem;
 
 /* forms */
 .form{
-  display: flex;
+  display: flex; 
   max-width: 60rem;
   margin: 0 auto; 
   justify-content: center;
@@ -360,7 +367,9 @@ max-height: 10rem;
   width: 40rem;
   padding: 2rem;
   border: .1rem #c0c0c0 solid; 
-  border-radius: .5rem
+  border-radius: .5rem;
+  margin-top: 1rem;
+
 }
 
 .form-container > div{
@@ -414,13 +423,20 @@ max-height: 10rem;
 
  .table{
    width: 100%;
+   border-collapse:collapse;
  }
 
- th{
+ .table th, .table td{
    text-align: left;
+   border: 0.1rem solid #e4e4e4;
+   padding: 0.5rem
  }
- tbody>tr:nth-child(odd){
-   background-color: #f0f0f0;
+ .table tbody>tr:nth-child(odd){
+   background-color: #f4f4f4;
+ }
+ .table button{
+   margin: 0 0.2rem;
+   
  }
 
  /* checkoutSteps */

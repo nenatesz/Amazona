@@ -13,6 +13,10 @@ import PlaceOrderScreen from "./screens/PlaceOrderScreen"
 import "./App.css";
 import { useDispatch, useSelector } from "react-redux";
 import { signout } from "./actions/userActions";
+import OrderScreen from "./screens/OrderScreen";
+import OrderHistoryScreen from "./screens/OrderHistoryScreen";
+import ProfileScreen from "./screens/ProfileScreen";
+import PrivateRoute from "./screens/PrivateRoute";
 
 
 function App() {
@@ -54,11 +58,40 @@ function App() {
                <div className='dropdown'>
                <Link to="#">{userInfo.name} <i className='fa fa-caret-down'></i></Link>
                <ul className='dropdown-content'>
+                 <li>
+                   <Link to='/profile'>User Profile</Link>
+                 </li>
+                 <li>
+                   <Link to="/orderhistory">Order History</Link>
+                 </li>
+                 <li>
                  <Link to="#signout" onClick={signoutHandler}>Sign Out</Link>
+                 </li>
                </ul>
                </div>):
                (<Link to="/signin">signin</Link>)
-            }            
+            }   
+               {userInfo && userInfo.isAdmin && (
+                 <div className='dropdown'>
+                   <Link to='#admin'>
+                     Admin <i className='fa fa-caret-down'></i>
+                   </Link>
+                   <ul className='dropdown-content'>
+                     <li>
+                       <Link to='/dashboard'>Dashborad</Link>
+                     </li>
+                     <li>
+                       <Link to='/productlist'>products</Link>
+                     </li>
+                     <li>
+                       <Link to='/orderlist'>Orders</Link>
+                     </li>
+                     <li>
+                       <Link to='/userlist'>Users</Link>
+                     </li>
+                   </ul>
+                 </div>
+               )}      
          </div>
         </header>
         <aside className="sidebar">
@@ -77,15 +110,18 @@ function App() {
         </aside>
         <main className="main">
           <div className="content">
-            <Route path="/products" component={ProductsScreen} />
-            <Route path="/shipping" component={ShippingScreen} />
-            <Route path="/payment" component={PaymentScreen} />
-            <Route path="/placeorder" component={PlaceOrderScreen} />
-            <Route path="/signin" component={SigninScreen} />
-            <Route path="/register" component={RegisterScreen} />
-            <Route path="/product/:id" component={ProductScreen} />
-            <Route path="/cart/:id?" component={CartScreen} />
-            <Route path="/" exact={true} component={HomeScreen} />
+            <Route path="/products" component={ProductsScreen}></Route>
+            <Route path="/cart/:id?" component={CartScreen}></Route>
+            <Route path="/product/:id" component={ProductScreen}></Route>
+            <Route path="/signin" component={SigninScreen}></Route>
+            <Route path="/register" component={RegisterScreen}></Route>
+            <Route path="/shipping" component={ShippingScreen}></Route>
+            <Route path="/payment" component={PaymentScreen}></Route>
+            <Route path="/placeorder" component={PlaceOrderScreen}></Route>
+            <Route path="/order/:id" component={OrderScreen}></Route>
+            <Route path="/orderhistory" component={OrderHistoryScreen}></Route>
+            <PrivateRoute path="/profile" component={ProfileScreen}></PrivateRoute>
+            <Route path="/" exact={true} component={HomeScreen}></Route>
           </div>
         </main>
         <footer className="footer row center">All right reserved</footer>

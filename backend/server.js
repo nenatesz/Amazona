@@ -7,6 +7,7 @@ import userRouter from "./routes/userRoute.js";
 import productRouter from "./routes/productRoute.js";
 // import paymentRouter from "./routes/payment.js";
 import orderRouter from "./routes/orderRoute.js";
+// import paymentRouter from "./routes/paymentRouter";
 
 dotenv.config();
 
@@ -27,6 +28,9 @@ mongoose.connect(mongodbUrl, {
 app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
 app.use('/api/orders', orderRouter);
+app.get('/api/config/paypal', (req, res) => {
+    res.send(config.PAYPAL_CLIENT_ID)
+})
 
 // MiddleWare
 app.use((err, req, res, next) => {

@@ -4,7 +4,8 @@ import mongoose from "mongoose";
 const paymentSchema = new mongoose.Schema({
     name: {type: String, required: true},
     email: {type: String, required: true},
-    amount: {type: Number, required: true},
+    totalPrice: {type: Number, required: true},
+    refernce: {type: String, required: true},
 });
 
 const Payment = mongoose.model("Payment", paymentSchema);

@@ -17,11 +17,9 @@ function PlaceOrderScreen(props){
     const {cartItems, shippingAddress, payment} = cart;  
     const dispatch = useDispatch()
 
-    if(!shippingAddress.address){
-        props.history.push("/shipping")
-    } else if(!payment){
+    if(!payment){
         props.history.push("/payment")
-    }
+    } 
 
     const toPrice = (num) => Number(num.toFixed(2));
 
@@ -29,18 +27,18 @@ function PlaceOrderScreen(props){
        dispatch(createOrder({...cart, orderItems: cartItems}))
     }
 
-    
 
-    const itemsPrice = toPrice(cartItems.reduce((a,c) => a + c.price* c.qty, 0));
-    const shippingPrice = itemsPrice > 100 ? toPrice(0) : toPrice(10);
-    const taxPrice = toPrice(0.75 * itemsPrice);
-    const totalPrice = itemsPrice + shippingPrice + taxPrice;
+    cart.itemsPrice = toPrice(cartItems.reduce((a,c) => a + c.price* c.qty, 0));
+    cart.shippingPrice = cart.itemsPrice > 100 ? toPrice(0) : toPrice(10);
+    cart.taxPrice = toPrice(0.75 * cart.itemsPrice);
+    cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
   
 
     useEffect(() => {
         if(success){
             props.history.push(`/order/${order._id}`);
             dispatch({type: ORDER_CREATE_RESET})
+            
         }
     }, [success, dispatch, props.history, order]);
 
@@ -65,7 +63,7 @@ function PlaceOrderScreen(props){
                     Payment
                 </h3>
                 <div>
-                    <b>Method:</b> {cart.payment.paymentMethod}
+                    <b>Method:</b> {cart.payment}
                 </div>
             </div>
             <div>
@@ -103,19 +101,19 @@ function PlaceOrderScreen(props){
                     <h2>Order Summary</h2>
                 <li>
                     <div>Items</div>
-                    <div>${itemsPrice.toFixed(2)}</div>
+                    <div>${cart.itemsPrice.toFixed(2)}</div>
                 </li>
                 <li>
                     <div>Shipping</div>
-                    <div>${shippingPrice.toFixed(2)}</div>
+                    <div>${cart.shippingPrice.toFixed(2)}</div>
                 </li>
                 <li>
                     <div>Tax</div>
-                    <div>${taxPrice.toFixed(2)}</div>
+                    <div>${cart.taxPrice.toFixed(2)}</div>
                 </li>
                 <li>
                     <div>Order Total</div>
-                    <div>${totalPrice.toFixed(2)}</div>
+                    <div>${cart.totalPrice.toFixed(2)}</div>
                 </li>
                 <li>
                     <button className="button primary full-width" onClick={placeOrderHandler}>Place Order</button>

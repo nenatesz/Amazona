@@ -16,21 +16,20 @@ const listProducts = () => async (dispatch) => {
 
 
 const saveProduct = (product) => async (dispatch, getState) => {
-    
+    dispatch({type: PRODUCT_SAVE_REQUEST, payload: product});
+    const {userSignin:{userInfo}} = getState();
     try{
-        dispatch({type: PRODUCT_SAVE_REQUEST, payload: product})
-        const {userSignin:{userInfo}} = getState()
         if (!product._id){
             const {data} = await Axios.post("/api/products", product, {
                 headers: {
-                    Authorization: 'Bearer ' + userInfo.token
+                    Authorization: `Bearer ${userInfo.token}`
                 }
             });
             dispatch({type: PRODUCT_SAVE_SUCCESS, paylaod: data})
         }else{
             const {data} = await Axios.put(`/api/products/${product._id}`, product, {
                 headers: {
-                    Authorization: 'Bearer ' + userInfo.token
+                    Authorization: `Bearer ${userInfo.token}`
                 }
             });
             dispatch({type: PRODUCT_SAVE_SUCCESS, paylaod: data})
