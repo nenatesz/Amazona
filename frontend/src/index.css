@@ -523,7 +523,9 @@ max-height: 10rem;
   max-width: 10rem;
 }
 
-
+.rating i{
+  color: #f08000;
+}
 
 
 
