@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { savePayment } from '../actions/cartActions'
 import CheckoutSteps from '../components/checkoutSteps';
@@ -29,23 +29,23 @@ function PaymentScreen (props){
                 </div>
                 <div> 
                     <div>  
-                    <input type='radio' name='paymentMethod' id='paymentMethod' value='paystack'
+                    <input type='radio' name='paymentMethod' id='paymentMethod' value='PayPal'
                     required checked  
                     onChange={(e)=>setPaymentMethod(e.target.value)}>
                     </input>
                     <label htmlFor='paymentMethod'>
-                        Paystack
+                        PayPal
                     </label>
                     </div> 
                 </div>
                 <div> 
                     <div>  
-                    <input type='radio' name='paymentMethod' id='paymentMethod' value='flutterwave'
+                    <input type='radio' name='paymentMethod' id='paymentMethod' value='PayStack'
                     required   
                     onChange={(e)=>setPaymentMethod(e.target.value)}>
                     </input>
                     <label htmlFor='paymentMethod'>
-                        flutterwave
+                        payStack
                     </label>
                     </div> 
                 </div>

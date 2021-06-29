@@ -33,6 +33,7 @@ app.get('/api/config/paypal', (req, res) => {
 })
 
 // MiddleWare
+// eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
     res.status(500).send({ message: err.message });
 })
@@ -51,9 +52,9 @@ app.use((err, req, res, next) => {
 //     res.send(data.products);
 // });
 
-const port = config.PORT;
+const port = config.PORT || 5000;
 app.listen(port, () => {
-    console.log(`server started at http://localhost:${5000}`)
+    console.log(`server started at http://localhost:${port}`)
 })
 
 

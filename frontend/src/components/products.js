@@ -33,7 +33,7 @@ function Products(props){
 
 export default Products
 
-{/* <div>{products.map((product)=> (<Products key={product._id} products={product}></Products>))}</div>
+// {/* <div>{products.map((product)=> (<Products key={product._id} products={product}></Products>))}</div>
     
-}
-</div> */}
+// }
+// </div> */}
