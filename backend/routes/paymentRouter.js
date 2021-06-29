@@ -1,5 +1,8 @@
-import express from "express";
-import Payment from "../models/PaymentModel";
+const express = require("express");
+
+
+
+const Payment = require("../models/PaymentModel");
 
 const paymentRouter = express.Router() 
 
@@ -15,4 +18,4 @@ paymentRouter.post("/api.paystack.co/transaction/initialize", async (req, res) =
 })
    
 
-export default paymentRouter;
+module.exports = {paymentRouter};

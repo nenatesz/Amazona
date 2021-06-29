@@ -1,5 +1,5 @@
-import jwt from "jsonwebtoken";
-import config from "./config"
+const jwt = require("jsonwebtoken");
+const {config} = require("./config"); 
 
 const generateToken = (user) => {
     return jwt.sign({
@@ -43,4 +43,4 @@ const isAdmin = (req, res, next) => {
     }   
 }
 
-export { generateToken, isAuth, isAdmin };
+module.exports = { generateToken, isAuth, isAdmin };

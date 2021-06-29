@@ -1,7 +1,7 @@
-import express from 'express';
-import Order from '../models/orderModel';
-import expressAsyncHandler from 'express-async-handler';
-import { isAuth } from '../util';
+const express = require("express");
+const {Order} = require("../models/orderModel");
+const expressAsyncHandler = require('express-async-handler');
+const {isAuth} = require('../util');
 
 
 const orderRouter = express.Router();
@@ -40,7 +40,7 @@ orderRouter.get('/:id', expressAsyncHandler(async (req, res) => {
     }
 }))
 
-orderRouter.put('/:id/pay', isAuth,expressAsyncHandler(async (req, res) => {
+orderRouter.put('/:id/pay', isAuth, expressAsyncHandler(async (req, res) => {
     const order = await Order.findById(req.params.id);
     if(order){
         order.isPaid = true;
@@ -60,4 +60,4 @@ orderRouter.put('/:id/pay', isAuth,expressAsyncHandler(async (req, res) => {
 ));
 
 
-export default orderRouter;
+module.exports =  {orderRouter};
