@@ -9,7 +9,7 @@ const {isAuth, isAdmin} = require('../util');
 const productRouter = express.Router();
 
 productRouter.get("/", expressAsyncHandler(async (req, res) => {
-    const products = await Product.find({});
+    const products = await Product.find();
     // res.setHeader('People', 'Fun');
     // return res.status(200).send(products)
     res.send(products)
