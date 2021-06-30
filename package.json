@@ -25,7 +25,6 @@
     "start": "nodemon backend/server.js",
     "client": "cd frontend && yarn start",
     "server": "nodemon backend/server.js",
-    "build": "npm run build",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
   },
   "author": "",
