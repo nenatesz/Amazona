@@ -22,11 +22,11 @@
     "npm": "6.14.11"
   },
   "scripts": {
-    "start": "nodemon backend/server.js",
+    "start": "node backend/server.js",
     "client": "cd frontend && npm start",
     "server": "nodemon backend/server.js",
-    "build": "npm run build",
-    "dev": "concurrently --kill-others-on-fail \"npm server\" \"npm client\""
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "author": "",
   "license": "ISC"
