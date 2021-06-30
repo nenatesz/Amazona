@@ -9,10 +9,11 @@ const {productRouter}= require("./backend/routes/productRoute");
 // import paymentRouter from "./routes/payment.js";
 const {orderRouter}= require("./backend/routes/orderRoute");
 const cors = require('cors');
-const path = require('path')
+const path = require('path');
+require('dotenv').config()
 // import paymentRouter from "./routes/paymentRouter";
 
-if (process.env.NODE_ENV !== 'production') require('dotenv').config()
+// if (process.env.NODE_ENV !== 'production') require('dotenv').config()
 
 const app = express()
 app.use(express.json())
