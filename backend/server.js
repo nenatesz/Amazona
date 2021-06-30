@@ -1,24 +1,24 @@
 
 const express = require("express"); 
-const dotenv = require("dotenv") ;
-const config = require("./config");
+// const dotenv = require("dotenv") ;
+const config = require("./../config");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const {userRouter} = require("./routes/userRoute");
 const {productRouter}= require("./routes/productRoute");
 // import paymentRouter from "./routes/payment.js";
 const {orderRouter}= require("./routes/orderRoute");
+const cors = require('cors');
+// const path = require('path')
 // import paymentRouter from "./routes/paymentRouter";
 
-dotenv.config();
+
 
 const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
-const cors = require('cors');
-app.use(cors());
-app.use(cors({ origin: true }));
 app.use(bodyParser.json())
+app.use(cors({ origin: true }));
 const mongodbUrl = config.MONGODB_URL
 mongoose.connect(mongodbUrl, {
     useNewUrlParser: true,
@@ -26,6 +26,14 @@ mongoose.connect(mongodbUrl, {
     useCreateIndex: true
 
 }).catch(error => console.log(error.reason))
+
+// if (process.env.NODE_ENV === 'production') {
+//     app.use(express.static(path.join(__dirname, 'frontend')));
+
+//     app.get('*', (req, res) => {
+//         res.sendFile(path.join(__dirname, 'frontend', 'index.html'))
+//     });
+// }
 
 
 
