@@ -12,7 +12,7 @@ const cors = require('cors');
 const path = require('path')
 // import paymentRouter from "./routes/paymentRouter";
 
-
+if (process.env.NODE_ENV !== 'production') require('dotenv').config()
 
 const app = express()
 app.use(express.json())
