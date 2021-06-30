@@ -23,9 +23,10 @@
   },
   "scripts": {
     "start": "nodemon backend/server.js",
-    "client": "cd frontend && yarn start",
+    "client": "cd frontend && npm start",
     "server": "nodemon backend/server.js",
-    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
+    "build": "npm run build",
+    "dev": "concurrently --kill-others-on-fail \"npm server\" \"npm client\""
   },
   "author": "",
   "license": "ISC"
