@@ -3,7 +3,6 @@ const express = require("express");
 // const dotenv = require("dotenv") ;
 const config = require("./config");
 const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
 const {userRouter} = require("./backend/routes/userRoute");
 const {productRouter}= require("./backend/routes/productRoute");
 // import paymentRouter from "./routes/payment.js";
@@ -11,22 +10,30 @@ const {orderRouter}= require("./backend/routes/orderRoute");
 const cors = require('cors');
 const path = require('path');
 require('dotenv').config()
-// import paymentRouter from "./routes/paymentRouter";
 
-// if (process.env.NODE_ENV !== 'production') require('dotenv').config()
-
-const app = express()
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }));
-app.use(bodyParser.json())
-app.use(cors({ origin: true }));
-const mongodbUrl = config.MONGODB_URL
+const mongodbUrl = config.MONGODB_URL || "mongodb://localhost/amazona"
 mongoose.connect(mongodbUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true
 
 }).catch(error => console.log(error.reason))
+
+let db = mongoose.connection;
+db.on('error', (err)=> console.log(err));
+db.once('open', ()=> console.log('we are connected'));
+
+const app = express()
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }));
+app.use(cors({ origin: true }));
+
+app.use('/api/users', userRouter);
+app.use('/api/products', productRouter);
+app.use('/api/orders', orderRouter);
+app.get('/api/config/paypal', async(req, res) => {
+    res.send(config.PAYPAL_CLIENT_ID)
+})
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, 'frontend/build')));
@@ -38,12 +45,7 @@ if (process.env.NODE_ENV === 'production') {
 
 
 
-app.use('/api/users', userRouter);
-app.use('/api/products', productRouter);
-app.use('/api/orders', orderRouter);
-app.get('/api/config/paypal', async(req, res) => {
-    res.send(config.PAYPAL_CLIENT_ID)
-})
+
 
 // MiddleWare
 // eslint-disable-next-line no-unused-vars
