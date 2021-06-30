@@ -1,13 +1,13 @@
 
 const express = require("express"); 
 // const dotenv = require("dotenv") ;
-const config = require("./../config");
+const config = require("./config");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const {userRouter} = require("./routes/userRoute");
-const {productRouter}= require("./routes/productRoute");
+const {userRouter} = require("./backend/routes/userRoute");
+const {productRouter}= require("./backend/routes/productRoute");
 // import paymentRouter from "./routes/payment.js";
-const {orderRouter}= require("./routes/orderRoute");
+const {orderRouter}= require("./backend/routes/orderRoute");
 const cors = require('cors');
 // const path = require('path')
 // import paymentRouter from "./routes/paymentRouter";
