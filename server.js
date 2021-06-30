@@ -9,7 +9,7 @@ const {productRouter}= require("./backend/routes/productRoute");
 // import paymentRouter from "./routes/payment.js";
 const {orderRouter}= require("./backend/routes/orderRoute");
 const cors = require('cors');
-// const path = require('path')
+const path = require('path')
 // import paymentRouter from "./routes/paymentRouter";
 
 
@@ -27,13 +27,13 @@ mongoose.connect(mongodbUrl, {
 
 }).catch(error => console.log(error.reason))
 
-// if (process.env.NODE_ENV === 'production') {
-//     app.use(express.static(path.join(__dirname, 'frontend')));
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, 'build')));
 
-//     app.get('*', (req, res) => {
-//         res.sendFile(path.join(__dirname, 'frontend', 'index.html'))
-//     });
-// }
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, 'build', 'index.html'))
+    });
+}
 
 
 
