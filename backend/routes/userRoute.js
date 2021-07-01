@@ -1,7 +1,7 @@
 
 const bcrypt = require('bcryptjs');
 const data = require("../data.js");
-const {User} = require("../models/userModel");
+const User = require("../models/userModel");
 const express = require("express");
 const expressAsyncHandler = require('express-async-handler');
 const {generateToken, isAuth} = require('../util');
@@ -111,4 +111,4 @@ userRouter.put('/profile', isAuth, expressAsyncHandler( async (req,res) => {
 }))
 
 
-module.exports = {userRouter};
+module.exports = userRouter;

@@ -18,4 +18,4 @@ paymentRouter.post("/api.paystack.co/transaction/initialize", async (req, res) =
 })
    
 
-module.exports = {paymentRouter};
+module.exports = paymentRouter;

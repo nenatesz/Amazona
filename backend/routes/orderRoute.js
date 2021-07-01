@@ -1,5 +1,5 @@
 const express = require("express");
-const {Order} = require("../models/orderModel");
+const Order = require("../models/orderModel");
 const expressAsyncHandler = require('express-async-handler');
 const {isAuth} = require('../util');
 
@@ -60,4 +60,4 @@ orderRouter.put('/:id/pay', isAuth, expressAsyncHandler(async (req, res) => {
 ));
 
 
-module.exports =  {orderRouter};
+module.exports =  orderRouter;

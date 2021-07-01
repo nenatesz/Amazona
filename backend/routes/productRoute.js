@@ -1,4 +1,4 @@
-const {data}= require("../data.js");
+const data= require("../data.js");
 const Product = require("../models/productModel.js");
 const express = require("express");
 const expressAsyncHandler = require('express-async-handler');
@@ -87,7 +87,7 @@ productRouter.get("/:id", async (req, res) => {
      }
  })
 
- module.exports = {productRouter};
+ module.exports = productRouter;
 
 
 

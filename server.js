@@ -3,25 +3,26 @@ const express = require("express");
 // const dotenv = require("dotenv") ;
 const config = require("./config");
 const mongoose = require("mongoose");
-const {userRouter} = require("./backend/routes/userRoute");
-const {productRouter}= require("./backend/routes/productRoute");
+const userRouter= require("./backend/routes/userRoute");
+const productRouter= require("./backend/routes/productRoute");
 // import paymentRouter from "./routes/payment.js";
-const {orderRouter}= require("./backend/routes/orderRoute");
+const orderRouter= require("./backend/routes/orderRoute");
 const cors = require('cors');
 const path = require('path');
 require('dotenv').config()
 
-const mongodbUrl = config.MONGODB_URL || "mongodb://localhost/amazona"
+const mongodbUrl = config.MONGODB_URL || "mongodb://localhost:27017/amazona"
 mongoose.connect(mongodbUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true
 
-}).catch(error => console.log(error.reason))
+}).catch(error => console.log(error))
 
-let db = mongoose.connection;
-db.on('error', (err)=> console.log(err));
-db.once('open', ()=> console.log('we are connected'));
+
+// let db = mongoose.connection;
+// db.on('error', (err)=> console.log(err));
+// db.once('open', ()=> console.log('we are connected'));
 
 const app = express()
 app.use(express.json())
@@ -49,9 +50,9 @@ if (process.env.NODE_ENV === 'production') {
 
 // MiddleWare
 // eslint-disable-next-line no-unused-vars
-app.use((err, req, res, next) => {
-    res.status(500).send({ message: err.message });
-})
+// //app.use((err, req, res, next) => {
+//     res.status(500).send({ message: err.message });
+// })
  
  
 // app.get("/api/products/:id", (req, res) => {
