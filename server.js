@@ -15,7 +15,8 @@ const mongodbUrl = config.MONGODB_URL || "mongodb://127.0.0.1:27017/amazona"
 mongoose.connect(mongodbUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true
+    useCreateIndex: true,
+    poolSize: 10
 
 }).catch(error => console.log(error))
 
