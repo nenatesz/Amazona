@@ -22,9 +22,9 @@ const {
 
 
 module.exports = {
-    MONGODB_URL: MONGODB_URL,
-    JWT_SECRET: JWT_SECRET,
-    PORT: PORT,
-    PAYSTACK_PUBLIC_KEY: PAYSTACK_PUBLIC_KEY,
-    PAYPAL_CLIENT_ID: PAYPAL_CLIENT_ID
+    mongodb_url: MONGODB_URL,
+    jwt_secret: JWT_SECRET,
+    port: PORT,
+    paystack_public_key: PAYSTACK_PUBLIC_KEY,
+    paypal_client_id: PAYPAL_CLIENT_ID
 }

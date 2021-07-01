@@ -7,7 +7,7 @@ const generateToken = (user) => {
         name: user.name,
         email: user.email,
         isAdmin: user.isAdmin,
-    }, config.JWT_SECRET, {
+    }, config.jwt_secret, {
         expiresIn: '30d'
     })
     
