@@ -21,7 +21,7 @@ const isAuth = (req, res, next) => {
    if (authorization) {
        const token = authorization.slice(7, authorization.length) //Bearer xxxxx; the slice method on the authorization removes the bearer and leaves only the token
        // the verify method decrypts the token
-       jwt.verify(token, config.JWT_SECRET, (err, decode) => {
+       jwt.verify(token, config.jwt_secret, (err, decode) => {
            if (err){
                return res.status(401).send({msg: "Invalid Token"})
            }else{

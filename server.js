@@ -32,7 +32,7 @@ app.use('/api/users', userRouter);
 app.use('/api/products', productRouter);
 app.use('/api/orders', orderRouter);
 app.get('/api/config/paypal', async(req, res) => {
-    res.send(config.PAYPAL_CLIENT_ID)
+    res.send(config.paypal_client_id)
 })
 
 if (process.env.NODE_ENV === 'production') {
@@ -67,9 +67,9 @@ if (process.env.NODE_ENV === 'production') {
 //     res.send(data.products);
 // });
 
-const port = config.PORT || 5000;
-app.listen(port, () => {
-    console.log(`server started at http://localhost:${port}`)
+
+app.listen(config.port, () => {
+    console.log(`server started at http://localhost:${config.port}`)
 })
 
 
