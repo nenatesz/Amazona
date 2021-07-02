@@ -11,12 +11,15 @@ const cors = require('cors');
 const path = require('path');
 require('dotenv').config()
 
-const mongodbUrl =  "mongodb+srv://Amazona:amazonaPassword@shopping-cart.8a5k6.mongodb.net/test"
+
+    const mongodbUrl =  config.mongodb_url
 mongoose.connect(mongodbUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
-}).catch(error => console.log(error))
+}).catch(error=>console.log(error))
+    
+
 
 
 // let db = mongoose.connection;

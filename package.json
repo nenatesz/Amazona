@@ -22,7 +22,7 @@
     "npm": "6.14.11"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "nodemon server.js",
     "frontend-install": "npm install --prefix frontend",
     "frontend": "npm start --prefix frontend",
     "server": "nodemon server.js",
