@@ -44,10 +44,16 @@ const reducer = combineReducers({
     userDetails: userDetailsReducer,
     userUpdateProfile: userUpdateProfileReducer,
 })
-
+let store;
 // thunk allows us run async operation inside action in redux
-const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-const store = createStore(reducer, initialState, composeEnhancer(applyMiddleware(thunk)))
+if (process.env.NODE_ENV ===  'development') {
+    const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+     store = createStore(reducer, initialState, composeEnhancer(applyMiddleware(thunk)))
+}else{
+     store = createStore(reducer, initialState, applyMiddleware(thunk))
+}
+
+
 
 
 export default store;
